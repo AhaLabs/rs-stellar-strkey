@@ -57,13 +57,13 @@ proptest! {
 proptest! {
     #[test]
     fn test_public_key_ed25519_to_string_doesnt_panic(data: [u8; 32]) {
-        Strkey::PublicKeyEd25519(StrkeyPublicKeyEd25519(data)).to_string();
+        let _ = Strkey::PublicKeyEd25519(StrkeyPublicKeyEd25519(data)).to_string();
     }
 }
 
 fn assert_convert_roundtrip(s: &str, strkey: &Strkey) {
-    let strkey_result = Strkey::from_string(&s).unwrap();
+    let strkey_result = Strkey::from_string(s).unwrap();
     assert_eq!(&strkey_result, strkey);
     let str_result = strkey.to_string();
-    assert_eq!(s, str_result)
+    assert_eq!(s, str_result);
 }
